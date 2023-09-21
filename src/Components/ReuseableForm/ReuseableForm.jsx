@@ -1,28 +1,30 @@
-import useInputState from "../../hooks/HookForm/useInputTest";
+import './ReuseableForm.css';
 
+const ReuseableForm = ({formTitle, handleSubmit, submitBtnText='submit', children}) => {
 
-const HookForm = () => {
-    // const [name, setName] = useInputState('barik')
-    const emailState = useInputState('Email >>>')
-
-    const handleSubmit = e => {
-        console.log(emailState.value);
+    const handleLogingSubmit = e => {
         e.preventDefault();
+        const data = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            password: e.target.password.value
+        }
+        handleSubmit(data);
     }
+
+    console.log(children);
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <h2>{formTitle}</h2>
+            <form className='form' onSubmit={handleLogingSubmit}>
                 <input 
-                    // onChange={setName}
-                    // value={name}
                     type="text" 
                     name="username" 
                     placeholder="Your Name"/>
                 <br />
 
-                <input
-                    {...emailState}
+                <input 
                     type="email" 
                     name="email" 
                     placeholder="Your Email" />
@@ -36,10 +38,11 @@ const HookForm = () => {
 
                 <input 
                     type="submit" 
-                    value="Submit" />
+                    value={submitBtnText} 
+                    className='btn btn-primary'/>
             </form>
         </div>
     );
 };
 
-export default HookForm;
+export default ReuseableForm;
