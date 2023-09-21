@@ -3,10 +3,11 @@ import useInputState from "../../hooks/HookForm/useInputTest";
 
 
 const HookForm = () => {
-    const [name, setName] = useInputState('barik')
+    // const [name, setName] = useInputState('barik')
+    const emailState = useInputState('Email >>>')
 
     const handleSubmit = e => {
-        console.log(name);
+        console.log(emailState.value);
         e.preventDefault();
     }
 
@@ -14,11 +15,13 @@ const HookForm = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <input 
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
+                    // onChange={setName}
+                    // value={name}
                     type="text" name="username" placeholder="Your Name"/>
                 <br />
-                <input type="email" name="email" placeholder="Your Email" />
+                <input 
+                {...emailState}
+                type="email" name="email" placeholder="Your Email" />
                 <br />
                 <input type="password" name="password" placeholder="Password" />
                 <br />
